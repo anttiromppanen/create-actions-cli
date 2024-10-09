@@ -1,4 +1,4 @@
-import { DEPENDENCIES_TO_DETECT } from "../const/dependenciesToDetect";
+import { DEPENDENCIES_TO_DETECT } from "../const/dependenciesToDetect.const";
 import readPackageJson from "./readPackageJson";
 
 /**

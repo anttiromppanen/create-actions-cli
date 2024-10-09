@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import { UI_PROMPT_FIELDS } from "../const/ui.const";
 import { PromptQuestionType } from "../types/inquirer.types";
 import handleInquiryErrors from "../utils/handleInquiryErrors";
+import promptJobs from "./promptJobs.ui";
 
 /**
  * Starts the CLI UI and prompts the user for information about the workflow
@@ -11,8 +12,14 @@ import handleInquiryErrors from "../utils/handleInquiryErrors";
  */
 
 export default async function startUi() {
+  console.log("\nWelcome to the Create GitHub Actions CLI tool\n");
+
   const answers = await inquirer
     .prompt(UI_PROMPT_FIELDS)
     .catch((error) => handleInquiryErrors(error));
-  return answers;
+  const jobs = await promptJobs();
+
+  const fullWorkflow = { ...answers, jobs };
+
+  return fullWorkflow;
 }
