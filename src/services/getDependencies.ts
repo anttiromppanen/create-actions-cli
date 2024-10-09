@@ -1,5 +1,5 @@
-import { dependenciesToDetect } from "../utils/dependenciesToDetect";
-import readPackageJson from "../utils/readPackageJson";
+import { DEPENDENCIES_TO_DETECT } from "../const/dependenciesToDetect";
+import readPackageJson from "./readPackageJson";
 
 /**
  * Get the dependencies from the package.json file
@@ -20,7 +20,7 @@ export default async function getDependencies() {
   const allDependencies = [...dependencies, ...devDependencies];
 
   const matchingDependencies = allDependencies.filter((dep) =>
-    dependenciesToDetect.includes(dep),
+    DEPENDENCIES_TO_DETECT.includes(dep),
   );
 
   return matchingDependencies;

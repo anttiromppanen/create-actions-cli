@@ -1,4 +1,4 @@
-export const dependenciesToDetect = [
+export const DEPENDENCIES_TO_DETECT = [
   // Frameworks
   "react",
   "react-dom",

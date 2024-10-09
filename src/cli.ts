@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-import getGitBranches from "./utils/getGitBranches";
+import { MOCK_WORKFLOW } from "./const/mockData.const";
 import startUi from "./ui/main.ui";
-
-const { localBranches, remoteBranches } = getGitBranches();
-console.log(localBranches, remoteBranches);
+import writeYamlFile from "write-yaml-file";
 
 async function main() {
   // start ui
-  const answers = await startUi();
-  console.log(answers);
+  // const answers = await startUi();
+  // console.log(answers);
+  writeYamlFile(".github/workflows/foo.yaml", MOCK_WORKFLOW).then(() => {
+    console.log("done");
+  });
 }
 
 main();
