@@ -9,8 +9,11 @@ function readPackageJson() {
   return new Promise((resolve, reject) =>
     fs.readFile(packageJsonPath, "utf8", (err: Error, data: any) => {
       if (err) {
-        console.error("Error reading package.json:", err);
+        console.error(
+          "No package.json found in the current directory. Make sure to have a package.json file in your project root.",
+        );
         reject(err);
+        process.exit(1);
       } else {
         const { dependencies, devDependencies } = JSON.parse(data);
         resolve({ dependencies, devDependencies });

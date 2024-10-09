@@ -1,28 +1,15 @@
 #!/usr/bin/env node
 
-import { dependenciesToDetect } from "./utils/dependenciesToDetect";
-import detectGitRepo from "./utils/detectGitRepo";
-import readPackageJson from "./utils/readPackageJson";
+import getGitBranches from "./utils/getGitBranches";
+import startUi from "./ui/main.ui";
 
-const gitBranches = detectGitRepo();
-console.log(gitBranches);
+const { localBranches, remoteBranches } = getGitBranches();
+console.log(localBranches, remoteBranches);
 
-// Read the package.json file and check for matching dependencies
-(async () => {
-  const dependenciesFromPackageJson = (await readPackageJson()) as {
-    dependencies: Record<string, string>;
-    devDependencies: Record<string, string>;
-  };
+async function main() {
+  // start ui
+  const answers = await startUi();
+  console.log(answers);
+}
 
-  const dependencies = Object.keys(dependenciesFromPackageJson.dependencies);
-  const devDependencies = Object.keys(
-    dependenciesFromPackageJson.devDependencies,
-  );
-
-  const allDependencies = [...dependencies, ...devDependencies];
-
-  const matchingDependencies = allDependencies.filter((dep) =>
-    dependenciesToDetect.includes(dep),
-  );
-  console.log(matchingDependencies);
-})();
+main();
